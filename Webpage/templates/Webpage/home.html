@@ -1,0 +1,73 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'Webpage/styles.css' %}">
+    <script src="https://kit.fontawesome.com/55b918ce29.js" crossorigin="anonymous"></script>
+    <script src="{% static 'Webpage/dynamic.js' %}"></script>
+    <title>Jamie's Drinking Problem</title>
+</head>
+<body>
+
+    <div class="intro" data-visible="true">
+        <header>
+            <h1>Welcome Alcoholics!</h1>
+            <button id="toggle-record">Record Drink</button>
+            <button id="toggle-history">View History</button>
+        </header>
+    </div>
+
+    <div class="card history" data-visible="false">
+        <button class="exit" onclick="revert()"><i class="fas fa-times"></i></button>
+        <header>
+            <h2>Alcohol History</h2>
+        </header>
+
+        <div class="card-body">
+            <!-- Will want a DJANGO for loop here to go over all of the events that were added -->
+            {% if drinks %} 
+                {% for drink in drinks %}
+                    <div class="night-out">
+                        <h3>{{ drink.bar }}</h3>
+                        <ul>
+                            <li>{{ drink.purchaser }}</li>
+                            <li>{{drink.date}}</li>
+                        </ul>
+                    </div>
+                {% endfor %}
+
+            {% else %}
+                <h3>No drinks yet</h3>
+            {% endif %}
+        </div>
+    </div>
+    <div class="card record" data-visible="false">
+        <button class="exit" onclick="revert()"><i class="fas fa-times"></i></button>
+        <header>
+            <h2>Record a Drink</h2>
+        </header>
+
+        <div class="card-body">
+            <form class="record-form" action="{% url 'add_drink' %}" method="POST">
+                {% csrf_token %}
+                <input placeholder="Purchased by (Dan / Riley)" name="purchaser" type="text">
+                <input placeholder="Bar Name" type="text" name="bar" id="">
+                <input type="date" name="date" id="">
+                <input type="submit" value="Submit Drink">
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>
+
+<!-- 
+    Info for the database object: 
+    1. Date
+    2. Bar
+    3. Drink Purchaser (Dan / Riley)
+ -->

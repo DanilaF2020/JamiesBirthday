@@ -1,0 +1,171 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+:root {
+    --shadow: 5px 5px 1em rgba(0, 0, 0, 30%);
+    --accent: #8EC39B;
+    --black: rgb(22, 22, 22);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    background-image: url("../../static/Webpage/ChickenBackground.png");
+    background-size: 35%;
+    background-color: #f0f0f0;
+    font-family: "Roboto", sans-serif;
+}
+
+.intro {
+    text-align: center;
+    padding: 1em;
+    background-color: white;
+    box-shadow: var(--shadow);
+    animation: openUp 1s;
+}
+
+.intro h1 {
+    margin-bottom: .5rem;
+    border-bottom: 5px solid var(--accent);
+    font-size: clamp(3rem, 7vw, 5rem);
+}
+
+.intro button {
+    padding: .5rem;
+    margin: .25rem;
+    background-color: transparent;
+    border: 1px solid var(--black);
+    font-size: clamp(1rem, 3vw, 3rem);
+    transition: all .25s;
+}
+
+.intro button:hover,
+.intro button:focus {
+    background-color: var(--black);
+    color: white;
+    cursor: pointer;
+}
+
+.card {
+    position: relative;
+    width: clamp(30em, 50vw, 45em);
+    margin: 1em;
+    background-color: white;
+    box-shadow: var(--shadow);
+}
+
+.card header {
+    padding: .5em;
+    color: white;
+    background-color: var(--black);
+    text-align: center;
+    font-size: clamp(2rem, 3vw, 3.5rem);
+    border-bottom: 5px solid var(--accent);
+}
+
+.card-body {
+    padding: .5em;
+}
+
+.night-out {
+    margin-bottom: .5em;
+    padding-bottom: .5em;
+    border-bottom: 2px solid var(--accent);
+    font-size: 1.25rem;
+}
+
+.night-out li {
+    margin-left: 1.5em;
+}
+
+.night-out:last-of-type {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.record-form {
+    display: flex; 
+    flex-direction: column;
+    justify-content: space-between;
+    padding: .5em;
+}
+
+.record-form input {
+    display: block;
+    padding: .5em;
+    margin: .5em 0;
+}
+
+.record-form input[type="submit"] {
+    background-color: var(--accent);
+    border: 1px solid var(--accent);
+    color: var(--black);
+    font-size: 1rem;
+}
+
+.record-form input[type="submit"]:hover,
+.record-form input[type="submit"]:focus {
+    background-color: #75a381;
+    cursor: pointer;
+}
+
+.exit {
+    position: absolute;
+    right: 5px;
+    top: 0px;
+    color: rgb(253, 72, 72);
+    background-color: transparent;
+    border: none;
+    font-size: 2rem;
+    line-height: 50%;
+}
+
+.exit:hover {
+    cursor: pointer;
+}
+
+div[data-visible="false"] {
+    display: none;
+}
+
+div[data-visible="true"] {
+    display: block;
+    animation: dropIn .5s;
+}
+
+div[data-visible="true"] .exit {
+    animation: spin 1s cubic-bezier( 0.68, -0.55, 0.265, 1.55 );
+}
+
+@keyframes dropIn {
+   0% {
+       opacity: 0%;
+       transform: translateY(-10%);
+   } 
+
+   60% {
+       opacity: 100%;
+   }
+
+   to {
+       opacity: 100%;
+       transform: translateY(0%);
+   }
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
